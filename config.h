@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";	/* Require: nerf-fonts-complete */
 static int borderpx = 2;
 
 /*
@@ -16,7 +16,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/sh";
+static char *shell = "/usr/bin/zsh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
@@ -91,7 +91,7 @@ char *termname = "st-256color";
  *
  *	stty tabs
  */
-unsigned int tabspaces = 8;
+unsigned int tabspaces = 4;
 
 /* bg opacity */
 float alpha = 0.8;
@@ -148,13 +148,14 @@ unsigned int defaultitalic = 7;
 unsigned int defaultunderline = 7;
 
 /*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
+* https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
+* Default style of cursor
+* 2: Block ("█")
+* 4: Underline ("_")
+* 6: Bar ("|")
+* 7: Snowman ("☃") 
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 6;
 
 /*
  * Default columns and rows numbers
@@ -212,14 +213,14 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ MODKEY, 		XK_l,		copyurl,	{.i =  0} },
-	{ MODKEY|ShiftMask,	XK_L,		copyurl,	{.i =  0} },
+	{ MODKEY, 		XK_l,		copyurl,	{.i =  0} },	/* Require: patch-copyurl */
+	{ MODKEY|ShiftMask,	XK_L,		copyurl,	{.i =  0} },	/* Require: patch-copyurl */
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,     	       	XK_bracketleft,    	kscrollup,      {.i =  1} },
-	{ MODKEY,           	XK_bracketright,  	kscrolldown,    {.i =  1} },
-	{ MODKEY|ControlMask,	XK_bracketleft,		kscrollup, 	{.i = -1} },
-	{ MODKEY|ControlMask,	XK_bracketright,	kscrolldown,	{.i = -1} },
+	{ MODKEY,     	       	XK_bracketleft,    	kscrollup,      {.i =  1} },	/* Require: patch-scrollback */
+	{ MODKEY,           	XK_bracketright,  	kscrolldown,    {.i =  1} },	/* Require: patch-scrollback */
+	{ MODKEY|ControlMask,	XK_bracketleft,		kscrollup, 	{.i = -1} },	/* Require: patch-scrollback */
+	{ MODKEY|ControlMask,	XK_bracketright,	kscrolldown,	{.i = -1} },	/* Require: patch-scrollback */
 };
 
 /*
